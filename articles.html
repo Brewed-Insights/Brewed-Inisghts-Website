@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articles | Brewed Insights</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Coffee-inspired accessible color palette */
+            --espresso: #2C1810;
+            --dark-roast: #3E2723;
+            --medium-roast: #5D4037;
+            --coffee-brown: #6D4C41;
+            --caramel: #A67C52;
+            --latte: #D7CCC8;
+            --cream: #EFEBE9;
+            --foam: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-gold: #C9A961;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--foam) 100%);
+            color: var(--espresso);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            max-width: 60px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--espresso);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-roast);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--medium-roast);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--medium-roast);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--espresso);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--espresso) 0%, var(--coffee-brown) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-roast);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--caramel));
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .coming-soon {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            max-width: 700px;
+            margin: 3rem auto;
+        }
+
+        .coming-soon-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .coming-soon-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin-bottom: 1.5rem;
+        }
+
+        .coming-soon-text {
+            font-size: 1.1rem;
+            color: var(--coffee-brown);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Article Preview Grid (for future use) */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-date {
+            font-size: 0.9rem;
+            color: var(--caramel);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin-bottom: 1rem;
+        }
+
+        .article-excerpt {
+            color: var(--coffee-brown);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--cream);
+            color: var(--dark-roast);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--espresso);
+            color: var(--latte);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .coming-soon {
+                padding: 3rem 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="coffee-logo.png" alt="Brewed Insights Logo" class="logo" />
+                    <span class="brand-name">Brewed Insights</span>
+                </a>
+            </div>
+            <nav>
+                <a href="about.html">About Me</a>
+                <a href="articles.html" class="active">Articles</a>
+                <a href="projects.html">Projects</a>
+                <a href="notes.html">Notes</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Articles</h1>
+            <div class="accent-line"></div>
+            <p class="page-subtitle">
+                Technical insights, tutorials, and thought leadership on data analytics,
+                business intelligence, and modern data technologies.
+            </p>
+        </div>
+
+        <div class="content">
+            <div class="coming-soon">
+                <span class="coming-soon-icon">📝</span>
+                <h2 class="coming-soon-title">Articles Coming Soon</h2>
+                <p class="coming-soon-text">
+                    I'm currently brewing up some fresh content on Power BI, Microsoft Fabric,
+                    DAX optimization, and data engineering best practices.
+                </p>
+                <p class="coming-soon-text">
+                    Check back soon for in-depth tutorials, case studies, and insights from
+                    my work in business intelligence and data analytics.
+                </p>
+            </div>
+
+            <!-- Future article grid will go here -->
+            <!-- <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-date">January 15, 2024</div>
+                    <h3 class="article-title">Building Scalable Semantic Models in Power BI</h3>
+                    <p class="article-excerpt">
+                        Learn how to design and implement semantic models that scale with your business needs...
+                    </p>
+                    <div class="article-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">DAX</span>
+                        <span class="tag">Data Modeling</span>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-tagline">"Brewing fresh insights, one dataset at a time."</p>
+            <div class="accent-line"></div>
+            <p class="footer-text">© 2024 Brewed Insights. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
