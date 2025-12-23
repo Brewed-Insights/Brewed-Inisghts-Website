@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me | Brewed Insights</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Coffee-inspired accessible color palette */
+            --espresso: #2C1810;
+            --dark-roast: #3E2723;
+            --medium-roast: #5D4037;
+            --coffee-brown: #6D4C41;
+            --caramel: #A67C52;
+            --latte: #D7CCC8;
+            --cream: #EFEBE9;
+            --foam: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-gold: #C9A961;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--foam) 100%);
+            color: var(--espresso);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            max-width: 60px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--espresso);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-roast);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--medium-roast);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--medium-roast);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--espresso);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--espresso) 0%, var(--coffee-brown) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-roast);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--caramel));
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--dark-roast);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--medium-roast);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-icon {
+            font-size: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--coffee-brown);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            margin-bottom: 3rem;
+        }
+
+        .experience-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-subtitle {
+            font-size: 1.1rem;
+            color: var(--caramel);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .experience-description {
+            color: var(--coffee-brown);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .highlight-list li {
+            padding: 0.5rem 0;
+            color: var(--dark-roast);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .highlight-list li::before {
+            content: '☕';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--espresso);
+            color: var(--latte);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .intro-section {
+                padding: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="coffee-logo.png" alt="Brewed Insights Logo" class="logo" />
+                    <span class="brand-name">Brewed Insights</span>
+                </a>
+            </div>
+            <nav>
+                <a href="about.html" class="active">About Me</a>
+                <a href="articles.html">Articles</a>
+                <a href="projects.html">Projects</a>
+                <a href="notes.html">Notes</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">About Me</h1>
+            <div class="accent-line"></div>
+            <p class="page-subtitle">Data analyst passionate about transforming complex data into actionable insights</p>
+        </div>
+
+        <div class="content">
+            <section class="intro-section">
+                <p class="intro-text">
+                    Welcome to Brewed Insights! I'm a data analyst specializing in business intelligence 
+                    and analytics, with a particular focus on the hospitality industry. My expertise lies 
+                    in Microsoft Fabric, Power BI, DAX, and SQL Server environments.
+                </p>
+                <p class="intro-text">
+                    I'm passionate about building sophisticated data solutions that drive business decisions. 
+                    From developing complex semantic models to creating financial reporting solutions and 
+                    managing data pipelines, I work to turn raw data into meaningful insights.
+                </p>
+                <p class="intro-text">
+                    This site serves as a hub for documenting my journey in data technologies, sharing 
+                    projects, and contributing to the data community through articles and technical notes.
+                </p>
+            </section>
+
+            <section class="skills-section">
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">
+                            <span class="skill-icon">📊</span>
+                            Business Intelligence
+                        </h3>
+                        <ul class="skill-list">
+                            <li>Power BI Development</li>
+                            <li>DAX & Advanced Calculations</li>
+                            <li>Semantic Model Design</li>
+                            <li>Interactive Dashboards</li>
+                            <li>Financial Reporting</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">
+                            <span class="skill-icon">🔧</span>
+                            Data Engineering
+                        </h3>
+                        <ul class="skill-list">
+                            <li>Microsoft Fabric</li>
+                            <li>SQL Server & T-SQL</li>
+                            <li>Data Pipelines</li>
+                            <li>Lakehouse Architecture</li>
+                            <li>ETL/ELT Processes</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">
+                            <span class="skill-icon">🏨</span>
+                            Industry Expertise
+                        </h3>
+                        <ul class="skill-list">
+                            <li>Hospitality Analytics</li>
+                            <li>Hotel Performance Metrics</li>
+                            <li>ADR & RevPAR Analysis</li>
+                            <li>STR Data Integration</li>
+                            <li>Property Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="experience-section">
+                <h2 class="section-title">What I Do</h2>
+                
+                <div class="experience-card">
+                    <h3 class="experience-title">Data Analytics & Visualization</h3>
+                    <p class="experience-subtitle">Turning Data into Insights</p>
+                    <p class="experience-description">
+                        I develop comprehensive Power BI solutions that transform complex datasets into 
+                        clear, actionable insights. My work includes creating interactive dashboards, 
+                        building advanced DAX measures, and designing semantic models that serve as the 
+                        foundation for enterprise reporting.
+                    </p>
+                    <ul class="highlight-list">
+                        <li>Design and implement Power BI semantic models with complex relationships</li>
+                        <li>Create dynamic reports using field parameters and advanced DAX calculations</li>
+                        <li>Optimize query performance and model efficiency</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <h3 class="experience-title">Data Pipeline Development</h3>
+                    <p class="experience-subtitle">Building Robust Data Infrastructure</p>
+                    <p class="experience-description">
+                        I architect and maintain data pipelines using Microsoft Fabric and SQL Server, 
+                        implementing best practices for data transformation and storage. My work ensures 
+                        data flows smoothly from source systems to analytical platforms.
+                    </p>
+                    <ul class="highlight-list">
+                        <li>Develop medallion architecture patterns in Microsoft Fabric Lakehouses</li>
+                        <li>Create efficient T-SQL procedures and transformations</li>
+                        <li>Implement data quality checks and lineage tracking</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <h3 class="experience-title">Hospitality Analytics</h3>
+                    <p class="experience-subtitle">Specialized Industry Solutions</p>
+                    <p class="experience-description">
+                        I bring deep expertise in hospitality data analytics, working with hotel performance 
+                        metrics, STR data, and management company transitions. My solutions help stakeholders 
+                        understand property performance and make data-driven decisions.
+                    </p>
+                    <ul class="highlight-list">
+                        <li>Build custom analytics for hotel revenue management and performance tracking</li>
+                        <li>Develop algorithms for detecting ownership transitions and market changes</li>
+                        <li>Create comparative analysis tools for property benchmarking</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-tagline">"Brewing fresh insights, one dataset at a time."</p>
+            <div class="accent-line"></div>
+            <p class="footer-text">© 2024 Brewed Insights. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
